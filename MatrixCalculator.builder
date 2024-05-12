@@ -13,26 +13,24 @@ class Matriz
 
   #Método para setar um valor baseado nas coordenadas dadas
   def set_valor(linha, coluna, valor)
-    #seta valor
     @data[linha][coluna] = valor
   end
 
   #método para get um valor na matriz baseado em suas coordenadas
   def get_valor(linha, coluna)
-    #retorna um valor
     @data[linha][coluna]
   end
 
-  #método para somar uma matriz com a outra
+  #método para somar uma matriz com a outra, criando uma matriz nova.
   def soma_matriz(outra_matriz)
     raise "Erro: Matrizes devem ter as mesmas dimensões." unless @linhas == outra_matriz.linhas && @colunas == outra_matriz.colunas
 
-    resultado = Matriz.new(@linhas, @colunas)  # Create a new matrix to store the result of addition
+    resultado = Matriz.new(@linhas, @colunas)
 
     @linhas.times do |i|  # itera sobre linhas
       @colunas.times do |j|  # itera sobre colunas
         # Soma elementos das duas matrizes baseado em sua posição
-        resultado.set_valor(i, j, @data[i][j] + outra_matriz.get_valor(i, j))  # Soma elementos das duas matrizes baseado em sua posição
+        resultado.set_valor(i, j, @data[i][j] + outra_matriz.get_valor(i, j))
       end
     end
 
@@ -63,9 +61,9 @@ matriz2.set_valor(0, 1, 2)
 matriz2.set_valor(1, 0, 3)
 matriz2.set_valor(1, 1, 4)
 
-# Print dimensions of matrices for debugging
-puts "Matriz 1 dimensions: #{matriz1.linhas} x #{matriz1.colunas}"
-puts "Matriz 2 dimensions: #{matriz2.linhas} x #{matriz2.colunas}"
+#debug
+#puts "Matriz 1 dimensions: #{matriz1.linhas} x #{matriz1.colunas}"
+#puts "Matriz 2 dimensions: #{matriz2.linhas} x #{matriz2.colunas}"
 
 matrizresultado = matriz1.soma_matriz(matriz2)
 matrizresultado.display_matriz()
