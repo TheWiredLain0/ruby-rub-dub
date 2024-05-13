@@ -1,11 +1,9 @@
 class Matriz
-  attr_reader :linhas, :colunas  #definindo bagulhos
+  attr_reader :linhas, :colunas
 
   # Construtor Recebe linhas e colunas como argumentos
   def initialize(linhas, colunas)
-    #inicialize a variável linhas com o argumento dado
     @linhas = linhas
-    #inicializa a variável colunas com o argumento dado
     @colunas = colunas
     #cria um array 2d cheio de zeros para guardar os dados
     @data = Array.new(linhas) { Array.new(colunas, 0) }
@@ -33,8 +31,29 @@ class Matriz
         resultado.set_valor(i, j, @data[i][j] + outra_matriz.get_valor(i, j))
       end
     end
-
     # retorna a matriz somada.
+    resultado
+  end
+
+  #método para multiplicação de matrizes
+  def multi_matriz(outra_matriz)
+    # Verifica se o número de colunas da primeira matriz é igual ao número de linhas da segunda matriz
+    raise "Erro: Matrizes têm dimensões incompatíveis." if @colunas != outra_matriz.linhas
+
+    # Cria uma nova matriz para armazenar o resultado
+    resultado = Matriz.new(@linhas, outra_matriz.colunas)
+
+    @linhas.times do |n|
+      outra_matriz.colunas.times do |m|
+        elemento_resultado = 0
+        @colunas.times do |o|
+          elemento_resultado += @data[i][k] * outra_matriz.get_valor(k, j)
+        end
+        resultado.set_valor(i, j, elemento_resultado)
+      end
+    end
+
+    # Retorna a matriz resultado
     resultado
   end
 
@@ -47,6 +66,7 @@ class Matriz
       puts  # para proxima linha
     end
   end
+
 end
 
 matriz1 = Matriz.new(2, 2)
@@ -65,5 +85,5 @@ matriz2.set_valor(1, 1, 4)
 #puts "Matriz 1 dimensions: #{matriz1.linhas} x #{matriz1.colunas}"
 #puts "Matriz 2 dimensions: #{matriz2.linhas} x #{matriz2.colunas}"
 
-matrizresultado = matriz1.soma_matriz(matriz2)
+matrizresultado = matriz1.multi_matriz(matriz2)
 matrizresultado.display_matriz()
